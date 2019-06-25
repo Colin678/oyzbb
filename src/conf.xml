@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-config.dtd">
+<configuration>
+	<properties resource="db.properties"/>
+	<!-- 引入你写的db.properties -->
+	
+	<!--设置全局参数的  一般很少碰  
+		<settings>
+			<setting name="" value=""/>
+		</settings>
+	-->
+ 	<typeAliases>
+ 		<!-- 别名忽略大小写 -->
+ 		<typeAlias type="xyz.oyzbb.entity.Customer" alias="Customer"/>
+ 		<!-- 批量定义别名
+ 			<package name="xyz.oyzbb.entity">
+ 			这个包下面的类名就是别名
+ 		 -->
+ 	</typeAliases>
+ 	
+ 	<environments default="environments">
+ 	<!-- 开发环境（自己的计算机） 还可以放测试或真正部署的机子上-->
+ 		
+ 		<environment id="development">
+ 			<!-- 事务的提交方式：
+ 				JDBC：利用jdbc的方式处理事务（commit rollback close）
+ 				MANAGED: 将事务由其他组件（spring,jobss）去托管 默认会关闭连接
+ 			 -->
+ 			
+ 			<transactionManager type="JDBC"/>
+ 			<!-- 数据源类型：
+ 				POOLED 使用数据库连接池
+ 				UNPOOLED  传统的jdbc模式 不推荐
+ 				JNDI 从汤姆猫中获得内置的数据库连接池
+ 			 -->
+ 			
+ 			<dataSource type="POOLED">
+ 			<!-- 配置数据库信息 -->
+ 				
+ 				<property name="driver" value="${driver}"/>
+ 				<property name="url" value="${url}"/>
+ 				<property name="username" value="${username}"/>
+ 				<property name="password" value="${password}"/>
+ 			</dataSource>
+ 		</environment>
+ 	</environments>
+ 	
+ 	<mappers>
+ 		<!-- 加载映射文件 -->
+ 		<mapper resource="xyz/oyzbb/mapper/customerMapper.xml"/>
+ 			<!-- 类的形式和一般是.不带后缀  文件的形式一般是/带后缀 -->
+ 	</mappers>
+</configuration>
